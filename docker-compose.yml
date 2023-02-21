@@ -68,25 +68,25 @@ services:
     environment:
       PORT: "9002"
       LND_CERT_FILE: "/lnd/tls.cert"
-      LND_ADMIN_MACAROON_FILE: "/lnd/data/chain/bitcoin/${BITCOIN_NETWORK}/admin.macaroon"
+      LND_ADMIN_MACAROON_FILE: "/lnd/data/chain/bitcoin/mainnet/admin.macaroon"
       CONFIG: '{
-	"enableUpdateDescribeGraph": false,
+        "enableUpdateDescribeGraph": false,
         "postRateLimit": 100,
         "rateLimit": 200,
         "forwardReserveFee": 0.01,
         "intraHubFee": 0.003,
-        "bitcoind": { "rpc": "$BITCOIND_URL" },
         "redis": { "port": 6379, "host": "boltcard_redis", "family": 4, "password": "$REDIS_PASSWORD", "db": 0 }, 
         "lnd": { "url": "$LND_IP:$LND_GRPC_PORT", "password": "$LND_PASSWORD"}, 
         "boltcardservice": { "url": "http://boltcard_main:9001" }
       }'
     volumes:
       - ./tls.cert:/lnd/tls.cert
-      - ./admin.macaroon:/lnd/data/chain/bitcoin/${BITCOIN_NETWORK}/admin.macaroon
+      - ./admin.macaroon:/lnd/data/chain/bitcoin/mainnet/admin.macaroon
     networks:
       - boltnet
   webserver:
     image: caddy
+    container_name: boltcard_caddy
     restart: unless-stopped
     ports:
       - "80:80"
