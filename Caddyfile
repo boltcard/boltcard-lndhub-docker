@@ -1,6 +1,6 @@
-https://your.domain.com {
+your.domain.com {
   reverse_proxy boltcard_main:9000
 }
-https://your.domain.com:8080 {
+your.domain.com:8080 {
   reverse_proxy boltcard_hub:9002
 }
