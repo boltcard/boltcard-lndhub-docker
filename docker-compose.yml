@@ -1,0 +1,107 @@
+version: '3'
+services:
+  boltcard:
+    build: 
+      context: ./boltcard
+      dockerfile: Dockerfile
+    container_name: boltcard_main
+    depends_on:
+      - db
+    restart: unless-stopped
+    environment:
+      - LOG_LEVEL=DEBUG
+      - DB_HOST=db
+      - DB_USER=cardapp
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_PORT=5432    
+      - DB_NAME=card_db
+    expose: 
+      - "9000"
+      - "9001"
+    volumes:
+      - ${PWD}/tls.cert:/boltcard/tls.cert
+      - ${PWD}/admin.macaroon:/boltcard/admin.macaroon
+    networks:
+      - boltnet
+  db:
+    image: postgres
+    container_name: boltcard_db
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=cardapp
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=card_db
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    volumes:
+      - db-data:/var/lib/postgresql/data
+      - ./boltcard/sql/select_db.sql:/docker-entrypoint-initdb.d/select_db.sql
+      - ./boltcard/sql/create_db.sql:/docker-entrypoint-initdb.d/create_db.sql
+      - ./boltcard/sql/settings.sql:/docker-entrypoint-initdb.d/settings.sql
+    expose:
+      - "5432"
+    networks:
+      - boltnet
+  redis:
+    container_name: boltcard_redis
+    image: redis:6.2-buster
+    command: redis-server --requirepass ${REDIS_PASSWORD}
+    restart: on-failure
+    stop_grace_period: 5m
+    stop_signal: SIGINT
+    volumes:
+      - boltcard_redis:/data
+    networks:
+      - boltnet
+  web:
+    container_name: boltcard_hub
+    build: 
+      context: ./BoltCardHub
+      dockerfile: Dockerfile
+    depends_on: [ redis ]
+    restart: on-failure
+    stop_grace_period: 5m30s
+    stop_signal: SIGINT
+    expose:
+      - "9002"
+    volumes:
+      - boltcard_hub_lnd:/lnd:ro
+    environment:
+      PORT: "9002"
+      LND_CERT_FILE: "/lnd/tls.cert"
+      LND_ADMIN_MACAROON_FILE: "/lnd/data/chain/bitcoin/${BITCOIN_NETWORK}/admin.macaroon"
+      CONFIG: '{
+        "bitcoind": { "rpc": "$BITCOIND_URL" },
+        "redis": { "port": 6379, "host": "boltcard_redis", "family": 4, "password": "$REDIS_PASSWORD", "db": 0 }, 
+        "lnd": { "url": "$LND_IP:$LND_GRPC_PORT", "password": "$LND_PASSWORD"}, 
+        "boltcardservice": { "url": "http://boltcard_main:9001" }
+      }'
+    volumes:
+      - ./tls.cert:/lnd/tls.cert
+      - ./admin.macaroon:/lnd/data/chain/bitcoin/${BITCOIN_NETWORK}/admin.macaroon
+    networks:
+      - boltnet
+  webserver:
+    image: caddy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "8080:8080"
+      - "443:443"
+      - "8443:443"
+      - "8443:443/udp"
+    volumes:
+      - ${PWD}/Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+    networks:
+      - boltnet
+networks:
+  boltnet:
+volumes:
+  db-data:
+  boltcard_hub_lnd:
+    external: true
+  boltcard_redis:
+  caddy_data:
+  caddy_config:
+    external: true

@@ -1,0 +1,5 @@
+.env
+admin.macaroon
+tls.cert
+BoltCardHub/
+boltcard/
