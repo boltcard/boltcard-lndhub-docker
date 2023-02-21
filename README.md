@@ -7,7 +7,7 @@
    
 ### pre setup
 ```
-$ git clone git@github.com:onesandzeros-nz/bolthub.git`
+$ git clone git@github.com:onesandzeros-nz/bolthub.git
 $ cd bolthub
 $ git clone git@github.com:onesandzeros-nz/BoltCardHub.git
 $ git clone git@github.com:boltcard/boltcard.git
