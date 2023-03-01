@@ -99,38 +99,6 @@ services:
       - caddy_config:/config
     networks:
       - boltnet
-  groundcontrol_db:
-    image: mariadb:latest
-    container_name: groundcontrol_db
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: example
-      MYSQL_DATABASE: groundcontrol
-      MYSQL_USER: groundcontrol
-      MYSQL_PASSWORD: groundcontrol
-    networks:
-      - boltnet
-    volumes:
-      - groundcontrol_db:/var/lib/mysql
-  groundcontrol:
-    container_name: groundcontrol
-    expose:
-      - "9003"
-    build:
-      context: ./GroundControl
-      dockerfile: Dockerfile
-    depends_on: [ groundcontrol_db ]
-    environment:
-      JAWSDB_MARIA_URL: $JAWSDB_MARIA_URL
-      FCM_SERVER_KEY: $FCM_SERVER_KEY
-      APNS_P8: $APNS_P8
-      APNS_P8_KID: $APNS_P8_KID
-      APPLE_TEAM_ID: $APPLE_TEAM_ID
-      BITCOIN_RPC: $BITCOIN_RPC
-      APNS_TOPIC: $APNS_TOPIC
-      PORT: "9003"
-    networks:
-      - boltnet
 networks:
   boltnet:
 volumes:
