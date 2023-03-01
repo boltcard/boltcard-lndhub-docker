@@ -7,10 +7,10 @@
    
 ### pre setup
 ```
-$ git clone git@github.com:onesandzeros-nz/bolthub.git
+$ git clone https://github.com/boltcard/boltcard-lndhub-docker
 $ cd bolthub
-$ git clone git@github.com:onesandzeros-nz/BoltCardHub.git
-$ git clone git@github.com:boltcard/boltcard.git
+$ git clone https://github.com/boltcard/boltcard-lndhub
+$ git clone https://github.com/boltcard/boltcard.git
 ```
 - Make a .env file (copy the .env.example file and change the variable values)
 - Edit `Caddyfile` to set the domain name
