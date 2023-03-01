@@ -14,8 +14,7 @@ $ git clone https://github.com/boltcard/boltcard.git
 ```
 - Rename the .env.example file to .env and change the variable values
 - Edit `Caddyfile` change the two domain names to your bolt card hub domain
-- Edit database details in `boltcard/sql/create__db_user.sql`
-- Edit settings.sql and copy over the original file in `boltcard/sql/settings.sql` [Bolt card system settings](https://github.com/boltcard/boltcard/blob/main/docs/SETTINGS.md)
+- Edit `settings.sql` [Bolt card system settings](https://github.com/boltcard/boltcard/blob/main/docs/SETTINGS.md)
 - Add `admin.macaroon` and `tls.cert` files in the /bolthub/ project directory
 
 ### service bring-up and running

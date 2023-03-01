@@ -12,7 +12,7 @@ services:
       - LOG_LEVEL=DEBUG
       - DB_HOST=db
       - DB_USER=cardapp
-      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_PASSWORD=database_password
       - DB_PORT=5432    
       - DB_NAME=card_db
     expose: 
@@ -29,14 +29,14 @@ services:
     restart: unless-stopped
     environment:
       - POSTGRES_USER=cardapp
-      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_PASSWORD=database_password
       - POSTGRES_DB=card_db
       - PGDATA=/var/lib/postgresql/data/pgdata
     volumes:
       - db-data:/var/lib/postgresql/data
       - ./boltcard/sql/select_db.sql:/docker-entrypoint-initdb.d/select_db.sql
       - ./boltcard/sql/create_db.sql:/docker-entrypoint-initdb.d/create_db.sql
-      - ./boltcard/sql/settings.sql:/docker-entrypoint-initdb.d/settings.sql
+      - ./settings.sql:/docker-entrypoint-initdb.d/settings.sql
     expose:
       - "5432"
     networks:
@@ -109,4 +109,3 @@ volumes:
   caddy_data:
     external: true
   caddy_config:
-  groundcontrol_db:
