@@ -9,7 +9,7 @@
 ```
 $ git clone https://github.com/boltcard/boltcard-lndhub-docker
 $ cd bolthub
-$ git clone https://github.com/boltcard/boltcard-lndhub
+$ git clone https://github.com/boltcard/boltcard-lndhub BoltCardHub
 $ git clone https://github.com/boltcard/boltcard.git
 ```
 - Make a .env file (copy the .env.example file and change the variable values)
