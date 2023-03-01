@@ -11,11 +11,19 @@ $ git clone https://github.com/boltcard/boltcard-lndhub-docker
 $ cd bolthub
 $ git clone https://github.com/boltcard/boltcard-lndhub BoltCardHub
 $ git clone https://github.com/boltcard/boltcard.git
+$ git clone https://github.com/BlueWallet/GroundControl.git
 ```
 - Rename the .env.example file to .env and change the variable values
 - Edit `Caddyfile` change the two domain names to your bolt card hub domain
 - Edit `settings.sql` [Bolt card system settings](https://github.com/boltcard/boltcard/blob/main/docs/SETTINGS.md)
 - Add `admin.macaroon` and `tls.cert` files in the /bolthub/ project directory
+
+
+
+#### Getting certificates for ground control
+- outdated https://dev.to/jakubkoci/react-native-push-notifications-313i
+- https://stackoverflow.com/questions/44631803/ios-swift-how-to-create-p8-file/67533665#67533665
+- get P8 hex `xxd -p file.p8 | tr -d '\n'`
 
 ### service bring-up and running
 ```
