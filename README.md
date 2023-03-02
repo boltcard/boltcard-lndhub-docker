@@ -7,7 +7,7 @@
    
 ### pre setup
 ```
-$ git clone https://github.com/boltcard/boltcard-lndhub-docker
+$ git clone https://github.com/boltcard/boltcard-lndhub-docker bolthub
 $ cd bolthub
 $ git clone https://github.com/boltcard/boltcard-lndhub BoltCardHub
 $ git clone https://github.com/boltcard/boltcard.git
