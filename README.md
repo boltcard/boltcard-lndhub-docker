@@ -28,5 +28,5 @@ $ docker volume create boltcard_hub_lnd
 $ docker compose up
 ```
 - Go to `https://your.domain.com:8080` to access your Bolt Card Hub GUI 
-- Either scan the QR from yout Bolt Card Hub GUI in the top right or
+- Either scan the QR from your Bolt Card Hub GUI in the top right or
 - enter the same URL into your Bolt Card Wallet to connect to your Bolt Card Hub
