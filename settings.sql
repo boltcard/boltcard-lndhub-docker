@@ -2,15 +2,16 @@
 
 DELETE FROM settings;
 
+-- at a minimum, the settings marked 'set this' must be set for your system
 -- an explanation for each of the bolt card server settings can be found here
 -- https://github.com/boltcard/boltcard/blob/main/docs/SETTINGS.md
 
 INSERT INTO settings (name, value) VALUES ('LOG_LEVEL', 'DEBUG');
-INSERT INTO settings (name, value) VALUES ('AES_DECRYPT_KEY', '');
-INSERT INTO settings (name, value) VALUES ('HOST_DOMAIN', '');
+INSERT INTO settings (name, value) VALUES ('AES_DECRYPT_KEY', ''); -- set this
+INSERT INTO settings (name, value) VALUES ('HOST_DOMAIN', ''); -- set this
 INSERT INTO settings (name, value) VALUES ('MIN_WITHDRAW_SATS', '1');
 INSERT INTO settings (name, value) VALUES ('MAX_WITHDRAW_SATS', '1000000');
-INSERT INTO settings (name, value) VALUES ('LN_HOST', '');
+INSERT INTO settings (name, value) VALUES ('LN_HOST', ''); -- set this
 INSERT INTO settings (name, value) VALUES ('LN_PORT', '10009');
 INSERT INTO settings (name, value) VALUES ('LN_TLS_FILE', '/boltcard/tls.cert');
 INSERT INTO settings (name, value) VALUES ('LN_MACAROON_FILE', '/boltcard/admin.macaroon');
