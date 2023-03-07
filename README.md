@@ -11,7 +11,7 @@ $ git clone https://github.com/boltcard/boltcard-lndhub-docker
 $ cd bolthub
 $ git clone https://github.com/boltcard/boltcard-lndhub BoltCardHub
 $ git clone https://github.com/boltcard/boltcard.git
-$ git clone https://github.com/BlueWallet/GroundControl.git
+$ git clone https://github.com/boltcard/boltcard-groundcontrol.git GroundControl
 ```
 - Rename the .env.example file to .env and change the variable values
 - Edit `Caddyfile` change the two domain names to your bolt card hub domain
