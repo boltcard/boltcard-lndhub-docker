@@ -92,11 +92,42 @@ services:
     ports:
       - "80:80"
       - "8080:8080"
+      - "8888:8888"
       - "443:443"
     volumes:
       - ${PWD}/Caddyfile:/etc/caddy/Caddyfile
       - caddy_data:/data
       - caddy_config:/config
+    networks:
+      - boltnet
+  groundcontrol_db:
+    image: mariadb:latest
+    container_name: groundcontrol_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: mariadb_password
+      MYSQL_DATABASE: groundcontrol
+      MYSQL_USER: groundcontrol
+      MYSQL_PASSWORD: groundcontrol
+    networks:
+      - boltnet
+    volumes:
+      - groundcontrol_db:/var/lib/mysql
+  groundcontrol:
+    container_name: groundcontrol
+    expose:
+      - "3001"
+    build:
+      context: ./
+      dockerfile: GroundControlDockerfile
+    depends_on: [ groundcontrol_db ]
+    environment:
+      JAWSDB_MARIA_URL: mysql://groundcontrol:groundcontrol@groundcontrol_db:3306/groundcontrol
+      FCM_SERVER_KEY: $FCM_SERVER_KEY
+      APNS_P8: $APNS_P8
+      APNS_P8_KID: $APNS_P8_KID
+      APPLE_TEAM_ID: $APPLE_TEAM_ID
+      APNS_TOPIC: $APNS_TOPIC
     networks:
       - boltnet
 networks:
@@ -109,3 +140,4 @@ volumes:
   caddy_data:
     external: true
   caddy_config:
+  groundcontrol_db:
