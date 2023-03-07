@@ -12,4 +12,4 @@ RUN npm install
 
 
 # Set the command to run the application
-CMD npm start & npm run worker-sender
+CMD npm start & npm run worker-blockprocessor & npm run worker-processmempool & npm run worker-sender
