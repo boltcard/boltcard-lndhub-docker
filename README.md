@@ -20,10 +20,8 @@ $ git clone https://github.com/boltcard/boltcard-groundcontrol.git GroundControl
 
 
 
-#### Getting certificates for ground control
-- outdated https://dev.to/jakubkoci/react-native-push-notifications-313i
-- https://stackoverflow.com/questions/44631803/ios-swift-how-to-create-p8-file/67533665#67533665
-- get P8 hex `xxd -p file.p8 | tr -d '\n'`
+[Ground control Doc](https://github.com/BlueWallet/GroundControl)
+
 
 ### service bring-up and running
 ```
