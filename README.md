@@ -1,9 +1,8 @@
 # Bolt Card Hub docker container
 
-### install Docker
+### install docker
 
-- [Docker engine download &
-   install](https://docs.docker.com/engine/install/)
+- [Docker engine download & install](https://docs.docker.com/engine/install/)
    
 ### pre setup
 ```
@@ -18,11 +17,6 @@ $ git clone https://github.com/boltcard/boltcard-groundcontrol.git GroundControl
 - Edit `settings.sql` [Bolt card system settings](https://github.com/boltcard/boltcard/blob/main/docs/SETTINGS.md)
 - Add `admin.macaroon` and `tls.cert` files in the /bolthub/ project directory
 
-
-
-[Ground control Doc](https://github.com/BlueWallet/GroundControl)
-
-
 ### service bring-up and running
 ```
 $ sudo groupadd docker
@@ -36,3 +30,7 @@ $ docker compose up
 - Go to `https://your.domain.com:8080` to access your Bolt Card Hub GUI 
 - Either scan the QR from your Bolt Card Hub GUI in the top right or
 - enter the same URL into your Bolt Card Wallet to connect to your Bolt Card Hub
+
+### reference documents
+
+[Ground Control](https://github.com/BlueWallet/GroundControl)
