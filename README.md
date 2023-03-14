@@ -36,3 +36,7 @@ $ docker compose up
 - Go to `https://your.domain.com:8080` to access your Bolt Card Hub GUI 
 - Either scan the QR from yout Bolt Card Hub GUI in the top right or
 - enter the same URL into your Bolt Card Wallet to connect to your Bolt Card Hub
+
+#### running your own groundcontrol at the same time
+- If you want to run your own ground control server, use `docker-compose-groundcontrol.yml`. `docker compose -f docker-compose-groundcontrol.yml up`
+- Make sure to change the ground control url in the app as well.

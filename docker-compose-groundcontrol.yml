@@ -12,7 +12,7 @@ services:
       - LOG_LEVEL=DEBUG
       - DB_HOST=db
       - DB_USER=cardapp
-      - DB_PASSWORD=database_password
+      - DB_PASSWORD=password
       - DB_PORT=5432    
       - DB_NAME=card_db
     expose: 
@@ -29,7 +29,7 @@ services:
     restart: unless-stopped
     environment:
       - POSTGRES_USER=cardapp
-      - POSTGRES_PASSWORD=database_password
+      - POSTGRES_PASSWORD=password
       - POSTGRES_DB=card_db
       - PGDATA=/var/lib/postgresql/data/pgdata
     volumes:
@@ -79,7 +79,7 @@ services:
         "lnd": { "url": "$LND_IP:$LND_GRPC_PORT", "password": "$LND_PASSWORD"}, 
         "boltcardservice": { "url": "http://boltcard_main:9001", "service_url": "http://boltcard_main:9000" }
       }'
-      GROUNDCONTROL: "$GROUNDCONTROL"
+      GROUNDCONTROL: "http://groundcontrol:3001"
     volumes:
       - ./tls.cert:/lnd/tls.cert
       - ./admin.macaroon:/lnd/data/chain/bitcoin/mainnet/admin.macaroon
@@ -90,14 +90,44 @@ services:
     container_name: boltcard_caddy
     restart: unless-stopped
     ports:
-      - "80:80"
-      - "8080:8080"
+      - "8082:8082"
+      - "8083:8083"
       - "8888:8888"
       - "443:443"
     volumes:
-      - ${PWD}/Caddyfile:/etc/caddy/Caddyfile
+      - ${PWD}/CaddyfileGroundControl:/etc/caddy/Caddyfile
       - caddy_data:/data
       - caddy_config:/config
+    networks:
+      - boltnet
+  groundcontrol_db:
+    image: mariadb:latest
+    container_name: groundcontrol_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: mariadb_password
+      MYSQL_DATABASE: groundcontrol
+      MYSQL_USER: groundcontrol
+      MYSQL_PASSWORD: groundcontrol
+    networks:
+      - boltnet
+    volumes:
+      - groundcontrol_db:/var/lib/mysql
+  groundcontrol:
+    container_name: groundcontrol
+    expose:
+      - "3001"
+    build:
+      context: ./
+      dockerfile: GroundControlDockerfile
+    depends_on: [ groundcontrol_db ]
+    environment:
+      JAWSDB_MARIA_URL: mysql://groundcontrol:groundcontrol@groundcontrol_db:3306/groundcontrol
+      FCM_SERVER_KEY: $FCM_SERVER_KEY
+      APNS_P8: $APNS_P8
+      APNS_P8_KID: $APNS_P8_KID
+      APPLE_TEAM_ID: $APPLE_TEAM_ID
+      APNS_TOPIC: $APNS_TOPIC
     networks:
       - boltnet
 networks:
@@ -110,3 +140,4 @@ volumes:
   caddy_data:
     external: true
   caddy_config:
+  groundcontrol_db:

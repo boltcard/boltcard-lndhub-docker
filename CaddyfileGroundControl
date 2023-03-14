@@ -4,3 +4,6 @@ your.domain.com {
 your.domain.com:8080 {
   reverse_proxy boltcard_hub:9002
 }
+your.domain.com:8888 {
+  reverse_proxy groundcontrol:3001
+}
