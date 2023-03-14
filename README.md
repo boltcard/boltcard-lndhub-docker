@@ -13,7 +13,8 @@ $ git clone https://github.com/boltcard/boltcard.git
 $ git clone https://github.com/boltcard/boltcard-groundcontrol.git GroundControl
 ```
 - Rename the .env.example file to .env and change the variable values
-- Edit `Caddyfile` change the domain names to your bolt card hub domain
+- Edit `Caddyfile` change the two domain names to your bolt card hub domain
+   - If you are using `docker-compose-groundcontrol.yml`, edit `CaddyfileGroundControl`. Change the three domain names to your bolt card hub domain
 - Edit `settings.sql` [Bolt card system settings](https://github.com/boltcard/boltcard/blob/main/docs/SETTINGS.md)
 - Add `admin.macaroon` and `tls.cert` files in the /bolthub/ project directory
 
