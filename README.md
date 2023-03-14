@@ -25,6 +25,7 @@ $ sudo usermod -aG docker ${USER}
 (log out & in again)
 $ docker volume create caddy_data
 $ docker volume create boltcard_hub_lnd
+$ cd bolthub
 // add -d option for detached mode
 $ docker compose up
 ```
