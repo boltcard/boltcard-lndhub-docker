@@ -1,5 +1,7 @@
 # Bolt Card Hub docker container
 
+There is a walkthough video on the [Bolt Card youtube channel](https://www.youtube.com/@boltcard)  
+
 ### install docker
 
 - [Docker engine download & install](https://docs.docker.com/engine/install/)
