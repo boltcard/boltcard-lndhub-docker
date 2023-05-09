@@ -63,8 +63,6 @@ services:
     stop_signal: SIGINT
     expose:
       - "9002"
-    volumes:
-      - boltcard_hub_lnd:/lnd:ro
     environment:
       PORT: "9002"
       LND_CERT_FILE: "/lnd/tls.cert"
