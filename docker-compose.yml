@@ -105,6 +105,7 @@ volumes:
   boltcard_hub_lnd:
     external: true
   boltcard_redis:
+    external: true
   caddy_data:
     external: true
   caddy_config:
