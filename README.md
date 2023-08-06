@@ -41,6 +41,39 @@ $ docker compose up
 - If you want to run your own ground control server, use `docker-compose-groundcontrol.yml`. `docker compose -f docker-compose-groundcontrol.yml up`
 - Make sure to change the ground control url in the app as well.
 
+
+
+### Upgrading bolt hub and bolt service to the latest version
+
+```
+$ cd bolthub
+$ cd BoltCardHub && git pull origin master
+$ cd ../boltcard && git pull origin master
+$ cd ../
+//this will take down your containers so make sure you are not using the hub
+$ docker compose down
+//removing container images to build a new ones
+//your image names might be different.
+//you can check them by running docker images.
+//delete the ones with *-boltcard and *-web at the end.
+$ docker image rm bolthub-boltcard
+$ docker image rm bolthub-web
+$ docker compose up -d
+```
+
+
+#### When upgrading boltcard service to enable PIN functionality
+If you are upgrading your boltcard service container to enable PIN functionality you have to run the commands below to update the database table
+
+```
+$ docker exec -it boltcard_db /bin/sh
+$ psql -d card_db -U cardapp
+$ ALTER TABLE cards ADD COLUMN pin_enable CHAR(1) NOT NULL DEFAULT 'N';
+$ ALTER TABLE cards ADD COLUMN pin_number CHAR(4) NOT NULL DEFAULT '0000';
+$ ALTER TABLE cards ADD COLUMN pin_limit_sats INT NOT NULL DEFAULT 0;
+```
+
+
 ### reference documents
 
 [Ground Control](https://github.com/BlueWallet/GroundControl)
