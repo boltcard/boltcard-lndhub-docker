@@ -12,7 +12,7 @@ $ git clone https://github.com/boltcard/boltcard-lndhub-docker bolthub
 $ cd bolthub
 $ git clone https://github.com/boltcard/boltcard-lndhub BoltCardHub
 $ git clone https://github.com/boltcard/boltcard.git
-$ git clone https://github.com/boltcard/boltcard-groundcontrol.git GroundControl
+$ git clone --depth 1 --branch v0.2.0 https://github.com/boltcard/boltcard-groundcontrol.git GroundControl
 ```
 - Rename the .env.example file to .env and change the variable values
 - Edit `Caddyfile` change the two domain names to your bolt card hub domain
@@ -47,8 +47,8 @@ $ docker compose up
 
 ```
 $ cd bolthub
-$ cd BoltCardHub && git pull origin master
-$ cd ../boltcard && git pull origin master
+$ cd BoltCardHub && git checkout v0.2.0
+$ cd ../boltcard && git checkout v0.4.0
 $ cd ../
 //this will take down your containers so make sure you are not using the hub
 $ docker compose down
@@ -62,7 +62,7 @@ $ docker compose up -d
 ```
 
 
-#### When upgrading boltcard service to enable PIN functionality
+#### When upgrading to boltcard service v0.4.0 and boltcard hub v0.2.0
 If you are upgrading your boltcard service container to enable PIN functionality you have to run the commands below to update the database table
 
 ```
