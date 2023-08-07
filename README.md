@@ -2,6 +2,8 @@
 
 There is a walkthough video on the [Bolt Card youtube channel](https://www.youtube.com/@boltcard)  
 
+![Bolt Card Hub](https://github.com/boltcard/boltcard-lndhub-docker/assets/3826238/d468fee6-8fa5-4dcd-9078-d511f077942b)
+
 ### install docker
 
 - [Docker engine download & install](https://docs.docker.com/engine/install/)
