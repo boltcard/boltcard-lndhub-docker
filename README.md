@@ -10,9 +10,9 @@ There is a walkthough video on the [Bolt Card youtube channel](https://www.youtu
 ```
 $ git clone https://github.com/boltcard/boltcard-lndhub-docker bolthub
 $ cd bolthub
-$ git clone https://github.com/boltcard/boltcard-lndhub BoltCardHub
-$ git clone https://github.com/boltcard/boltcard.git
-$ git clone --depth 1 --branch v0.2.0 https://github.com/boltcard/boltcard-groundcontrol.git GroundControl
+$ git clone --depth 1 --branch v0.2.0 https://github.com/boltcard/boltcard-lndhub BoltCardHub
+$ git clone --depth 1 --branch v0.3.0 https://github.com/boltcard/boltcard.git
+$ git clone https://github.com/boltcard/boltcard-groundcontrol.git GroundControl
 ```
 - Rename the .env.example file to .env and change the variable values
 - Edit `Caddyfile` change the two domain names to your bolt card hub domain
@@ -47,8 +47,12 @@ $ docker compose up
 
 ```
 $ cd bolthub
-$ cd BoltCardHub && git checkout v0.2.0
-$ cd ../boltcard && git checkout v0.4.0
+$ cd BoltCardHub
+$ git fetch --all --tags
+$ git checkout v0.2.0
+$ cd ../boltcard
+$ git fetch --all --tags
+$ git checkout v0.4.0
 $ cd ../
 //this will take down your containers so make sure you are not using the hub
 $ docker compose down
