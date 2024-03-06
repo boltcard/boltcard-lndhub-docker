@@ -1,4 +1,10 @@
 your.domain.com {
+  header {
+    Access-Control-Allow-Origin *
+    Access-Control-Allow-Credentials true
+    Access-Control-Allow-Methods *
+    Access-Control-Allow-Headers *
+  }
   reverse_proxy boltcard_main:9000
 }
 your.domain.com:8080 {
